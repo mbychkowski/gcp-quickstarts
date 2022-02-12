@@ -64,6 +64,8 @@ assign-super-user-permissions: enable-apis
 	@gcloud organizations add-iam-policy-binding ${ORGANIZATION_ID} --condition=None --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" --role=roles/billing.user
 	@gcloud organizations add-iam-policy-binding ${ORGANIZATION_ID} --condition=None --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" --role=roles/resourcemanager.folderAdmin
 	@gcloud organizations add-iam-policy-binding ${ORGANIZATION_ID} --condition=None --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" --role=roles/resourcemanager.organizationAdmin
+	@gcloud organizations add-iam-policy-binding ${PROJECT_ID} --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" --role roles/editor
+	
 
 .PHONY: replace-project-id
 replace-project-id:
