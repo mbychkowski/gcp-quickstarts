@@ -15,6 +15,11 @@
  */
 
 
+locals {
+    ip_range_pod = "${element(split("-", var.ip_range_pod), 0)}"
+    ip_range_svc = "${element(split("-", var.ip_range_svc), 0)}"
+}
+
  module "gke" {
     source             = "terraform-google-modules/kubernetes-engine/google"
     version            = "~> 16.0"
@@ -25,8 +30,8 @@
     initial_node_count = 4
     network            = var.network
     subnetwork         = var.subnet
-    ip_range_pods      = var.ip_range_pod
-    ip_range_services  = var.ip_range_svc
+    ip_range_pods      = locals.ip_range_pod
+    ip_range_services  = locals.ip_range_svc
 }
 
 resource "google_gke_hub_membership" "membership" {
