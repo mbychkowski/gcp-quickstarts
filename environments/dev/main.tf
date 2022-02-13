@@ -78,8 +78,8 @@ module "gke" {
     network      = module.vpc.network
     subnet       = module.vpc.subnet
     secondary_ip_ranges = module.vpc.secondary_ip_ranges
-    ip_range_pod = module.vpc.ip_range_pod
-    ip_range_svc = module.vpc.ip_range_svc
+    # ip_range_pod = module.vpc.ip_range_pod
+    # ip_range_svc = module.vpc.ip_range_svc
     sync_repo    = var.sync_repo
     sync_branch  = var.sync_branch
     policy_dir   = var.policy_dir

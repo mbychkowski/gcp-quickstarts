@@ -40,16 +40,6 @@ variable "subnet" {
     description = "The subnetwork to host the cluster in"
 }
 
-variable "ip_range_pod" {
-    type = string
-    description = "The name of the secondary subnet ip range to use for pods"
-}
-
-variable "ip_range_svc" {
-    type = string
-    description = "The name of the secondary subnet ip range to use for services"
-}
-
 variable "sync_repo" {
     type        = string
     description = "git URL for the repo which will be sync'ed into the cluster via Config Management"

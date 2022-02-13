@@ -26,11 +26,3 @@ output "subnet" {
 output "secondary_ip_ranges" {
     value = [for range_name in module.vpc.subnets_secondary_ranges : range_name]
 }
-
-output "ip_range_pod" {
-    value = element(flatten(module.vpc.subnets_secondary_ranges), 0)
-}
-
-output "ip_range_svc" {
-    value = element(flatten(module.vpc.subnets_secondary_ranges), 1)
-}
