@@ -30,6 +30,26 @@ variable "zone" {
     description = "the GCP zone in the region where the cluster will be created"
 }
 
+variable "network" {
+    type = string
+    description = "The VPC network to host the cluster in"
+}
+
+variable "subnet" {
+    type = string
+    description = "The subnetwork to host the cluster in"
+}
+
+variable "ip_range_pod" {
+    type = string
+    description = "The name of the secondary subnet ip range to use for pods"
+}
+
+variable "ip_range_svc" {
+    type = string
+    description = "The _name_ of the secondary subnet ip range to use for services"
+}
+
 variable "sync_repo" {
     type        = string
     description = "git URL for the repo which will be sync'ed into the cluster via Config Management"

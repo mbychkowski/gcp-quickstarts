@@ -23,10 +23,10 @@
     region             = var.region
     zones              = [var.zone]
     initial_node_count = 4
-    network            = module.vpc.network
-    subnetwork         = module.vpc.subnet
-    ip_range_pods      = module.vpc.ip_range_pod
-    ip_range_services  = module.vpc.ip_range_svc
+    network            = var.network
+    subnetwork         = var.subnet
+    ip_range_pods      = var.ip_range_pod
+    ip_range_services  = var.ip_range_svc
 }
 
 resource "google_gke_hub_membership" "membership" {

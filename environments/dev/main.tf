@@ -71,11 +71,15 @@ module "firewall" {
 }
 
 module "gke" {
-    source      = "../../modules/gke"
-    project     = var.project
-    region      = var.region
-    zone        = var.zone
-    sync_repo   = var.sync_repo
-    sync_branch = var.sync_branch
-    policy_dir  = var.policy_dir
+    source       = "../../modules/gke"
+    project      = var.project
+    region       = var.region
+    zone         = var.zone
+    network      = module.vpc.network
+    subnet       = module.vpc.subnet
+    ip_range_pod = module.vpc.ip_range_pod
+    ip_range_svc = module.vpc.ip_range_svc
+    sync_repo    = var.sync_repo
+    sync_branch  = var.sync_branch
+    policy_dir   = var.policy_dir
 }
