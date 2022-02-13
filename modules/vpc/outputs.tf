@@ -21,10 +21,12 @@ output "subnet" {
     value = "${element(module.vpc.subnets_names, 0)}"
 }
 
+# TODO: Determing how to seperate a list of values from subnets_secondary_ranges
+
 output "ip_range_pod" {
-    value = "${element(module.vpc.subnets_secondary_ranges, 0)}"
+    value = element(flatten(module.vpc.subnets_secondary_ranges), 0)
 }
 
 output "ip_range_svc" {
-    value = "${element(module.vpc.subnets_secondary_ranges, 1)}"
+    value = element(flatten(module.vpc.subnets_secondary_ranges), 1)
 }
