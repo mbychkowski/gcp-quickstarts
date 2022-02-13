@@ -15,7 +15,6 @@
 
 locals {
     network = "${element(split("-", var.subnet), 0)}"
-    TF_LOG = trace
 }
 
 resource "google_compute_firewall" "allow-ssh" {
