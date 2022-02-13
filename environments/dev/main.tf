@@ -33,11 +33,11 @@ module "vpc" {
 #   subnet  = "${module.vpc.subnet}"
 # }
 
-# module "firewall" {
-#   source  = "../../modules/firewall"
-#   project = "${var.project}"
-#   subnet  = "${module.vpc.subnet}"
-# }
+module "firewall" {
+  source  = "../../modules/firewall"
+  project = "${var.project}"
+  subnet  = "${module.vpc.subnet}"
+}
 
 # module "gke" {
 #     source = "../../modules"

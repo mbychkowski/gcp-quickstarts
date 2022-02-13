@@ -17,16 +17,20 @@ locals {
   network = "${element(split("-", var.subnet), 0)}"
 }
 
-resource "google_compute_firewall" "allow-http" {
-  name    = "${local.network}-allow-http"
-  network = "${local.network}"
-  project = "${var.project}"
+resource "google_compute_firewall" "allow-ssh-admin" {
+    name    = "${local.network}-allow-ssh-admin"
+    network = "${local.network}"
+    project = "${var.project}"
 
-  allow {
-    protocol = "tcp"
-    ports    = ["80"]
-  }
+    allow {
+        protocol = "tcp"
+        ports    = ["22", "3389"]
+    }
 
-  target_tags   = ["http-server"]
-  source_ranges = ["0.0.0.0/0"]
+    allow {
+        protocol = "icmp"
+    }
+
+    target_tags   = ["ssh-iap"]
+    source_ranges = ["35.235.240.0/20"]
 }
