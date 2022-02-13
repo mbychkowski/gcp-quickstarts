@@ -25,6 +25,6 @@ output "ip_range_pod" {
     value = "${element(module.vpc.subnets_secondary_ranges, 0)}"
 }
 
-output "ip_rang_svc" {
+output "ip_range_svc" {
     value = "${element(module.vpc.subnets_secondary_ranges, 1)}"
 }
