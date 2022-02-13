@@ -17,7 +17,7 @@
 
 locals {
     ip_range_pod = "${element(var.secondary_ip_ranges, 0)}"
-    ip_range_svc = "${var.env}-svc"
+    ip_range_svc = "${element(var.secondary_ip_ranges, 1)}"
 }
 
  module "gke" {
