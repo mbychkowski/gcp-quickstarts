@@ -18,7 +18,7 @@ locals {
 }
 
 resource "google_compute_firewall" "allow-ssh" {
-    name    = "${local.network}-allow-ssh"
+    name    = "allow-ssh"
     network = "${local.network}"
     project = "${var.project}"
 
