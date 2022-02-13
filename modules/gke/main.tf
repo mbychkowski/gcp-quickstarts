@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,63 +14,55 @@
  * limitations under the License.
  */
 
-locals {
-  cluster_type = "simple-regional-private"
+
+ module "gke" {
+    source             = "terraform-google-modules/kubernetes-engine/google"
+    version            = "~> 16.0"
+    project_id         = module.enabled_google_apis.project_id
+    name               = "sfl-acm"
+    region             = var.region
+    zones              = [var.zone]
+    initial_node_count = 4
+    network            = module.vpc.network
+    subnetwork         = module.vpc.subnet
+    ip_range_pods      = module.vpc.ip_range_pod
+    ip_range_services  = module.vpc.ip_range_svc
 }
 
-data "google_client_config" "default" {}
-
-provider "kubernetes" {
-  host                   = "https://${module.gke.endpoint}"
-  token                  = data.google_client_config.default.access_token
-  cluster_ca_certificate = base64decode(module.gke.ca_certificate)
+resource "google_gke_hub_membership" "membership" {
+  provider      = google-beta
+  membership_id = "membership-hub-${module.gke.name}"
+  endpoint {
+    gke_cluster {
+      resource_link = "//container.googleapis.com/${module.gke.cluster_id}"
+    }
+  }
 }
 
-data "google_compute_subnetwork" "subnetwork" {
-  name    = var.subnetwork
-  project = var.project_id
-  region  = var.region
+resource "google_gke_hub_feature" "configmanagement_acm_feature" {
+  name     = "configmanagement"
+  location = "global"
+  provider = google-beta
 }
 
-module "gke" {
-  source                    = "../../modules/private-cluster/"
-  project_id                = var.project_id
-  name                      = "${local.cluster_type}-cluster${var.cluster_name_suffix}"
-  regional                  = true
-  region                    = var.region
-  network                   = var.network
-  subnetwork                = var.subnetwork
-  ip_range_pods             = var.ip_range_pods
-  ip_range_services         = var.ip_range_services
-  create_service_account    = false
-  service_account           = var.compute_engine_service_account
-  enable_private_endpoint   = true
-  enable_private_nodes      = true
-  master_ipv4_cidr_block    = "172.16.0.0/28"
-  default_max_pods_per_node = 20
-  remove_default_node_pool  = true
-
-  node_pools = [
-    {
-      name              = "pool-01"
-      min_count         = 1
-      max_count         = 100
-      local_ssd_count   = 0
-      disk_size_gb      = 100
-      disk_type         = "pd-standard"
-      image_type        = "COS"
-      auto_repair       = true
-      auto_upgrade      = true
-      service_account   = var.compute_engine_service_account
-      preemptible       = false
-      max_pods_per_node = 12
-    },
-  ]
-
-  master_authorized_networks = [
-    {
-      cidr_block   = data.google_compute_subnetwork.subnetwork.ip_cidr_range
-      display_name = "VPC"
-    },
+resource "google_gke_hub_feature_membership" "feature_member" {
+  provider   = google-beta
+  location   = "global"
+  feature    = "configmanagement"
+  membership = google_gke_hub_membership.membership.membership_id
+  configmanagement {
+    version = "1.8.0"
+    config_sync {
+      source_format = "unstructured"
+      git {
+        sync_repo   = var.sync_repo
+        sync_branch = var.sync_branch
+        policy_dir  = var.policy_dir
+        secret_type = "none"
+      }
+    }
+  }
+  depends_on = [
+    google_gke_hub_feature.configmanagement_acm_feature
   ]
 }

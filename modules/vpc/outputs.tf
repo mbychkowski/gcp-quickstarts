@@ -14,9 +14,17 @@
 
 
 output "network" {
-  value = "${module.vpc.network_name}"
+    value = "${module.vpc.network_name}"
 }
 
 output "subnet" {
-  value = "${element(module.vpc.subnets_names, 0)}"
+    value = "${element(module.vpc.subnets_names, 0)}"
+}
+
+output "ip_range_pod" {
+    value = "${element(module.vpc.subnets_secondary_ranges, 0)}"
+}
+
+output "ip_rang_svc" {
+    value = "${element(module.vpc.subnets_secondary_ranges, 1)}"
 }

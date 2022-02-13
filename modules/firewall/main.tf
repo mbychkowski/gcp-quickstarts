@@ -20,7 +20,7 @@ locals {
 resource "google_compute_firewall" "allow-ssh" {
     name    = "${local.network}-allow-ssh"
     network = "${local.network}-vpc"
-    project = "${var.project}"
+    project = var.project
 
     allow {
         protocol = "tcp"
@@ -38,7 +38,7 @@ resource "google_compute_firewall" "allow-ssh" {
 resource "google_compute_router" "router" {
     name    = "${local.network}-router-vm"
     network = "${local.network}-vpc"
-    region  = "${var.region}"
+    region  = var.region
 }
 
 resource "google_compute_router_nat" "nat" {

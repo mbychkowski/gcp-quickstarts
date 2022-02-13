@@ -40,13 +40,13 @@ module "vpc" {
     secondary_ranges = {
         "${var.env}-subnet-gke" = [
             {
-                range_name    = "${var.env}-svc"
-                ip_cidr_range = "192.168.64.0/25"                
-            },
-            {
                 range_name    = "${var.env}-pod"
                 ip_cidr_range = "172.16.0.0/20"
-            }            
+            },
+            {
+                range_name    = "${var.env}-svc"
+                ip_cidr_range = "192.168.64.0/25"                
+            }
         ]
   }
 }
