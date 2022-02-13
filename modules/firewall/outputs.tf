@@ -14,5 +14,5 @@
 
 
 output "firewall_rule" {
-  value = "${google_compute_firewall.allow-ssh-admin.name}"
+  value = "${google_compute_firewall.allow-ssh.name}"
 }

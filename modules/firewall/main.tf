@@ -17,8 +17,8 @@ locals {
   network = "${element(split("-", var.subnet), 0)}"
 }
 
-resource "google_compute_firewall" "allow-ssh-admin" {
-    name    = "${local.network}-allow-ssh-admin"
+resource "google_compute_firewall" "allow-ssh" {
+    name    = "${local.network}-allow-ssh"
     network = "${local.network}"
     project = "${var.project}"
 
