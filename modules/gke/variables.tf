@@ -18,6 +18,11 @@ variable "project" {
     description = "the GCP project id where the cluster will be created"
 }
 
+variable "env" {
+    type        = string
+    description = "the environment in where the cluster is being created"
+}
+
 variable "region" {
     type        = string
     default     = "us-central1"
@@ -53,9 +58,4 @@ variable "sync_branch" {
 variable "policy_dir" {
     type        = string
     description = "the root directory in the repo branch that contains the resources."
-}
-
-variable "secondary_ip_ranges" {
-    type = list
-    description = "The name of the secondary subnet ip ranges to use for pods and services"
 }
