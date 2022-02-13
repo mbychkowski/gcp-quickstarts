@@ -16,7 +16,7 @@
 
 variable "project" {
     type        = string
-    description = "the GCP project where the cluster will be created"
+    description = "the GCP project id where the cluster will be created"
 }
 
 variable "region" {

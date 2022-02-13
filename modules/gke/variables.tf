@@ -13,6 +13,11 @@
 # limitations under the License.
 
 
+variable "project" {
+    type        = string
+    description = "the GCP project id where the cluster will be created"
+}
+
 variable "region" {
     type        = string
     default     = "us-central1"
