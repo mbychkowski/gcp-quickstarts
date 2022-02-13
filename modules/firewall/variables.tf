@@ -15,3 +15,5 @@
 
 variable "project" {}
 variable "subnet" {}
+variable "region" {}
+variable "env" {}
