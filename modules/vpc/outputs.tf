@@ -23,6 +23,10 @@ output "subnet" {
 
 # TODO: Determing how to seperate a list of values from subnets_secondary_ranges
 
+output "secondary_ip_ranges" {
+    value = [for range_name in module.vpc.subnets_secondary_ranges : range_name]
+}
+
 output "ip_range_pod" {
     value = element(flatten(module.vpc.subnets_secondary_ranges), 0)
 }

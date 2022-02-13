@@ -77,6 +77,7 @@ module "gke" {
     zone         = var.zone
     network      = module.vpc.network
     subnet       = module.vpc.subnet
+    secondary_ip_ranges = module.vpc.secondary_ip_ranges
     ip_range_pod = module.vpc.ip_range_pod
     ip_range_svc = module.vpc.ip_range_svc
     sync_repo    = var.sync_repo

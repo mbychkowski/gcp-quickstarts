@@ -47,7 +47,7 @@ variable "ip_range_pod" {
 
 variable "ip_range_svc" {
     type = string
-    description = "The _name_ of the secondary subnet ip range to use for services"
+    description = "The name of the secondary subnet ip range to use for services"
 }
 
 variable "sync_repo" {
@@ -63,4 +63,9 @@ variable "sync_branch" {
 variable "policy_dir" {
     type        = string
     description = "the root directory in the repo branch that contains the resources."
+}
+
+variable "secondary_ip_ranges" {
+    type = list
+    description = "The name of the secondary subnet ip ranges to use for pods and services"
 }
