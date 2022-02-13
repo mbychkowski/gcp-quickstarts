@@ -21,21 +21,21 @@ module "vpc" {
     routing_mode = "GLOBAL"
 
     subnets = [
-    {
-        subnet_name             = "${var.env}-subnet-gke"
-        subnet_ip               = "10.0.0.0/28"
-        subnet_region           = "us-central1"
-        subnet_private_access   = "true"
-        subnet_flow_logs        = "true"
-    },
-    {
-        subnet_name             = "${var.env}-subnet-vm"
-        subnet_ip               = "10.0.1.0/28"
-        subnet_region           = "us-central1"
-        subnet_private_access   = "true"
-        subnet_flow_logs        = "true"
-    }
-  ]
+        {
+            subnet_name             = "${var.env}-subnet-gke"
+            subnet_ip               = "10.0.0.0/28"
+            subnet_region           = "${var.region}"
+            subnet_private_access   = "true"
+            subnet_flow_logs        = "true"
+        },
+        {
+            subnet_name             = "${var.env}-subnet-vm"
+            subnet_ip               = "10.0.1.0/28"
+            subnet_region           = "${var.region}"
+            subnet_private_access   = "true"
+            subnet_flow_logs        = "true"
+        }
+    ]
 
     secondary_ranges = {
         "${var.env}-subnet-gke" = [

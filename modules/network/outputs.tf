@@ -12,29 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-locals {
-    env = "dev"
-}
 
-provider "google" {
-    project = "${var.project}"
+output "firewall_rule" {
+  value = "${google_compute_firewall.allow-ssh.name}"
 }
-
-module "vpc" {
-    source  = "../../modules/vpc"
-    project = "${var.project}"
-    region  = "${var.region}"
-    env     = "${local.env}"
-}
-
-module "firewall" {
-    source  = "../../modules/firewall"
-    project = "${var.project}"
-    subnet  = "${module.vpc.subnet}"
-    region  = "${var.region}"
-    env     = "${local.env}"
-}
-
-# module "gke" {
-#     source = "../../modules"
-# }

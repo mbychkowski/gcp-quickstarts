@@ -34,3 +34,33 @@ resource "google_compute_firewall" "allow-ssh" {
     target_tags   = ["ssh-iap"]
     source_ranges = ["35.235.240.0/20"]
 }
+
+resource "google_compute_router" "router" {
+    name    = "${local.network}-router-vm"
+    network = "${local.network}-vpc"
+    region  = "${var.region}"
+}
+
+resource "google_compute_router_nat" "nat" {
+    name                               = "${local.network}-outer-nat"
+    router                             = google_compute_router.router.name
+    region                             = "${var.region}"
+    nat_ip_allocate_option             = "AUTO_ONLY"
+    source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
+    
+    subnetworks = [
+        {
+            name                    = "${var.env}-subnet-vm"
+            source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
+        },
+        {
+            name                    = "${var.env}-subnet-gke"
+            source_ip_ranges_to_nat = ["ALL_IP_RANGES"]            
+        }
+    ] 
+
+    log_config {
+        enable = true
+        filter = "ERRORS_ONLY"
+    }
+}
