@@ -18,7 +18,7 @@
  module "gke" {
     source             = "terraform-google-modules/kubernetes-engine/google"
     version            = "~> 16.0"
-    project_id         = module.enabled_google_apis.project_id
+    project_id         = var.project
     name               = "sfl-acm"
     region             = var.region
     zones              = [var.zone]

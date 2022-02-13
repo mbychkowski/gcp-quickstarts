@@ -72,6 +72,7 @@ module "firewall" {
 
 module "gke" {
     source      = "../../modules/gke"
+    project     = var.project
     region      = var.region
     zone        = var.zone
     sync_repo   = var.sync_repo
