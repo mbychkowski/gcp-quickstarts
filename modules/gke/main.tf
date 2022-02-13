@@ -30,8 +30,8 @@ locals {
     initial_node_count = 4
     network            = var.network
     subnetwork         = var.subnet
-    ip_range_pods      = locals.ip_range_pod
-    ip_range_services  = locals.ip_range_svc
+    ip_range_pods      = local.ip_range_pod
+    ip_range_services  = local.ip_range_svc
 }
 
 resource "google_gke_hub_membership" "membership" {
