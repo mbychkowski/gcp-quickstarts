@@ -16,7 +16,6 @@
 
 
 locals {
-    TF_LOG = trace    
     ip_range_pod = "${element(split("-", var.ip_range_pod), 0)}"
     ip_range_svc = "${element(split("-", var.ip_range_svc), 0)}"
 }
