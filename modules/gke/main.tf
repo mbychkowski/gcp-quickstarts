@@ -27,6 +27,19 @@
     subnetwork         = var.subnet
     ip_range_pods      = "${var.env}-pod"
     ip_range_services  = "${var.env}-svc"
+
+    node_pools = [
+        {
+            name         = "pool-01"
+            machine_type = "e2-standard-2"
+            auto_repair  = true
+            auto_upgrade = true
+            enable_secure_boot = true
+            enable_integrity_monitoring = true
+            enable_shielded_nodes = true
+        }
+    ]
+
 }
 
 resource "google_gke_hub_membership" "membership" {
