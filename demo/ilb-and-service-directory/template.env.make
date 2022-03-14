@@ -1,0 +1,6 @@
+PROJECT_ID=kpt-bootstrap-001
+PRIVATE_VPC1=private-vpc1
+PRIVATE_VPC1_SUBNET1=private-subnet1
+PRIVATE_VPC1_SUBNET2=private-subnet2
+PRIVATE_VPC2=private-vpc2
+PRIVATE_VPC2_SUBNET1=private-subnet1
