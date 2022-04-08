@@ -30,6 +30,12 @@ network:
 		--source-ranges="35.235.240.0/20" --description="SSH via IAP" \
 		--target-tags=ssh-iap \
 		--network=tmp-net
+	@gcloud compute firewall-rules create fw-allow-health-check-and-proxy \
+	   --network=tmp-net \
+	   --action=allow \
+	   --direction=ingress \
+	   --source-ranges=130.211.0.0/22,35.191.0.0/16 \
+	   --rules=tcp:9376		
 	# Create a Cloud Router for the admin VM subnet:
 	@gcloud compute routers create tmp-router \
 		--network=tmp-net \
