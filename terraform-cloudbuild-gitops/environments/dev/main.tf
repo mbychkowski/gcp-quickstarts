@@ -46,12 +46,12 @@ module "enabled_google_apis" {
     "gkehub.googleapis.com",
     "anthosconfigmanagement.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-	"krmapihosting.googleapis.com",
-	"monitoring.googleapis.com",
-	"cloudasset.googleapis.com",
-	"secretmanager.googleapis.com",
-	"cloudbuild.googleapis.com",
-	"orgpolicy.googleapis.com"
+	  "krmapihosting.googleapis.com",
+	  "monitoring.googleapis.com",
+	  "cloudasset.googleapis.com",
+	  "secretmanager.googleapis.com",
+	  "cloudbuild.googleapis.com",
+	  "orgpolicy.googleapis.com"
   ]
 }
 
