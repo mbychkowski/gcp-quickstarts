@@ -2,6 +2,8 @@
 apt-get update -y
 apt-get install kubectl \
     git \
+    helm \
+    netcat \
     google-cloud-sdk-kpt -y
 
 apt-get install \
