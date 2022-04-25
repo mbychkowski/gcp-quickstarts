@@ -31,3 +31,11 @@ variable "ip_range_pods" {
 variable "ip_range_services" {
   description = "The secondary ip range to use for services"
 }
+
+variable "terraform_sa" {
+    description = "The serviceaccount for Terraform management"
+}
+
+variable "asm_version" {
+    description = "The version of ASM to install"
+}
