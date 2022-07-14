@@ -1,3 +1,5 @@
 **/**/access-token-file.txt
 **/**/.env*
 **/**/.terraform*
+
+venv

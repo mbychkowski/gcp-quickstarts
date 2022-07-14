@@ -7,6 +7,7 @@ apt-get install kubectl \
     google-cloud-sdk-kpt -y
 
 apt-get install \
+    jq \
     ca-certificates \
     curl \
     gnupg \

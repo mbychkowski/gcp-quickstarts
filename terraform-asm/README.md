@@ -54,3 +54,17 @@ terraform {
 }
 EOF
 ```
+
+```
+export CLUSTER_NAME=$(gcloud container clusters list --format="value(name.scope())")
+
+asmcli install \
+  <!-- --kubeconfig ~/.kube/config \ -->
+  --project_id ${PROJECT_ID} \
+  --cluster_name ${CLUSTER_NAME} \
+  --cluster_location ${CLUSTER_LOC} \
+  --fleet_id ${PROJECT_ID} \
+  --output_dir ${WORKDIR} \
+  --enable_all \
+  --ca mesh_ca
+```
