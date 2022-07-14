@@ -1,0 +1,4 @@
+name: projects/327256138501/policies/compute.vmCanIpForward
+spec:
+  rules:
+  - allowAll: true
