@@ -1,5 +1,12 @@
 # terraform-asm
 
+Enable api services if not already
+
+```
+gcloud services enable compute.googleapis.com \
+    container.googleapis.com
+```
+
 ```
 . .env
 ```
